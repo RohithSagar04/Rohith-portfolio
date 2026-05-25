@@ -9,10 +9,14 @@ import { GlassCard } from './components/GlassCard'
 import { TypingText } from './components/TypingText'
 import { Pipeline } from './components/Pipeline'
 import { SectionTitle } from './components/SectionTitle'
+import { ExperienceCard } from './components/ExperienceCard'
+import { ProjectCard3D } from './components/ProjectCard3D'
+import { SkillsMatrix } from './components/SkillsMatrix'
 
 type SectionId =
   | 'top'
   | 'about'
+  | 'experience'
   | 'skills'
   | 'workflow'
   | 'projects'
@@ -22,6 +26,7 @@ type SectionId =
 
 const SECTIONS: Array<{ id: SectionId; label: string }> = [
   { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
   { id: 'skills', label: 'Skills' },
   { id: 'workflow', label: 'Workflow' },
   { id: 'projects', label: 'Projects' },
@@ -32,77 +37,94 @@ const SECTIONS: Array<{ id: SectionId; label: string }> = [
 
 const SKILLS = {
   'Cloud & DevOps': [
-    { name: 'AWS (Basics)', icon: 'amazonwebservices' },
-    { name: 'Jenkins', icon: 'jenkins' },
-    { name: 'Maven', icon: 'maven' },
-    { name: 'Ansible', icon: 'ansible' },
-    { name: 'Git', icon: 'git' },
+    { name: 'AWS', icon: 'amazonwebservices', level: 75 },
+    { name: 'Jenkins', icon: 'jenkins', level: 85 },
+    { name: 'Maven', icon: 'maven', level: 80 },
+    { name: 'Ansible', icon: 'ansible', level: 75 },
+    { name: 'Docker', icon: 'docker', level: 85 },
+    { name: 'Kubernetes', icon: 'kubernetes', level: 70 },
+    { name: 'Git', icon: 'git', level: 90 },
+    { name: 'Linux', icon: 'linux', level: 80 },
   ],
-  'DevOps Tools': [
-    { name: 'Docker', icon: 'docker' },
-    { name: 'Kubernetes', icon: 'kubernetes' },
-    { name: 'Gradle', icon: 'gradle' },
-    { name: 'Linux', icon: 'linux' },
+  'Programming': [
+    { name: 'Python', icon: 'python', level: 90 },
+    { name: 'Java', icon: 'java', level: 85 },
+    { name: 'JavaScript', icon: 'javascript', level: 85 },
+    { name: 'TypeScript', icon: 'typescript', level: 85 },
+    { name: 'C', icon: 'c', level: 75 },
   ],
-  Programming: [
-    { name: 'Python', icon: 'python' },
-    { name: 'Java', icon: 'java' },
-    { name: 'C', icon: 'c' },
-    { name: 'C++', icon: 'cplusplus' },
+  'Frontend': [
+    { name: 'React', icon: 'react', level: 90 },
+    { name: 'HTML5', icon: 'html5', level: 95 },
+    { name: 'CSS3', icon: 'css3', level: 90 },
+    { name: 'TailwindCSS', icon: 'tailwindcss', level: 90 },
   ],
-  Backend: [
-    { name: 'Django', icon: 'django' },
-    { name: 'Node.js', icon: 'nodejs' },
-    { name: 'PostgreSQL', icon: 'postgresql' },
-    { name: 'MySQL', icon: 'mysql' },
-  ],
-  Web: [
-    { name: 'HTML', icon: 'html5' },
-    { name: 'CSS', icon: 'css3' },
-    { name: 'JavaScript', icon: 'javascript' },
-    { name: 'React', icon: 'react' },
-    { name: 'TailwindCSS', icon: 'tailwindcss' },
+  'Backend & Database': [
+    { name: 'Django', icon: 'django', level: 90 },
+    { name: 'Node.js', icon: 'nodejs', level: 85 },
+    { name: 'MySQL', icon: 'mysql', level: 85 },
+    { name: 'PostgreSQL', icon: 'postgresql', level: 80 },
+    { name: 'MongoDB', icon: 'mongodb', level: 75 },
   ],
 } as const
 
 const PROJECTS = [
   {
-    title: 'Detection of Axillary Lymph Node (ALN) Metastasis in Breast Cancer',
-    tech: ['Python', 'TensorFlow', 'Keras', 'EfficientNet-B0', 'Medical Imaging'],
+    title: 'Hospital Management System',
+    tech: ['Django REST', 'React 19', 'TypeScript', 'MySQL', 'JWT', 'AI Chatbot'],
     description:
-      'Built a deep learning system to predict ALN metastasis from histopathological images using a fine-tuned EfficientNet-B0 model with patch-based preprocessing and clinical parameter integration.',
-    github: 'https://github.com/RohithSagar04',
+      'End-to-end full-stack HMS with 18 REST API endpoints, 9 MySQL models, 6 role-based dashboards. Features AI chatbot and drug recommendation engine. Automated setup via PowerShell scripts.',
+    github: 'https://github.com/RohithSagar04/Hospital_Management_System',
     demo: '#',
+    highlight: 'Full Stack',
   },
   {
-    title: 'Phishing Website Detection',
-    tech: ['HTML', 'CSS', 'Python', 'Machine Learning'],
+    title: 'Carbon Credit Trading Platform',
+    tech: ['React.js', 'TypeScript', 'JWT', 'Blockchain', 'AI Verification'],
     description:
-      'Implemented a phishing website detection workflow and trained a model to classify websites for real-time checks.',
-    github: 'https://github.com/RohithSagar04',
+      'Full-stack platform for CO2 emissions tracking and carbon credit trading with blockchain transparency. JWT-based auth with role-based dashboards (Admin, Seller, Buyer) and AI verification layer.',
+    github: 'https://github.com/RohithSagar04/Carbon_Credit_Platform',
     demo: '#',
+    highlight: 'Blockchain',
   },
   {
-    title: 'Movie Review App',
-    tech: ['React 18', 'HTML', 'CSS', 'Node.js'],
+    title: 'ALN Metastasis Detection (IEEE Published)',
+    tech: ['Python', 'TensorFlow', 'Keras', 'EfficientNet-B0', 'Deep Learning'],
     description:
-      'Developed a user-friendly platform for movie insights with a React-based UI and a Node.js backend.',
+      'Deep learning system to predict Axillary Lymph Node metastasis in breast cancer using fine-tuned EfficientNet-B0 CNN. Peer-reviewed and presented at IEEE INSPIRE 2025, MIT College.',
     github: 'https://github.com/RohithSagar04',
     demo: '#',
+    highlight: 'IEEE Published',
   },
 ] as const
 
 const CERTS = [
-  'Internship — Full Stack Development (Varcons Technologies Pvt. Ltd.)',
-  'Hackathon Participation — Intercollegiate events (rapid prototyping & teamwork)',
-  'IEEE Certification — AI-Based Detection of ALN Metastasis (INSPIRE 2025, MIT College)',
+  'DevOps & Development Internship — Techmiya Solutions (6 months, Jan 2026 – Jun 2026)',
+  'Full Stack Development Internship — Varcons Technologies Pvt. Ltd.',
+  'IEEE Publication — AI-Based Detection of ALN Metastasis (INSPIRE 2025, MIT College)',
+  'Hackathon Participant — Multiple intercollegiate hackathons',
+] as const
+
+const EXPERIENCE = [
+  {
+    role: 'DevOps & Development Intern',
+    company: 'Techmiya Solutions',
+    period: 'Jan 2026 – Jun 2026 (6 Months)',
+    location: 'Bengaluru, Karnataka',
+    highlights: [
+      'Designed and maintained Jenkins pipelines integrated with Maven for automated build, test, and deployment',
+      'Worked with AWS services (EC2, S3, IAM) to provision and manage cloud infrastructure',
+      'Hands-on Docker container setup for application packaging and environment consistency',
+      'Contributed to frontend and backend development tasks in Agile sprint cycles',
+    ],
+  },
 ] as const
 
 const JOURNEY = [
-  { title: 'Learning programming', detail: 'Solidifying CS fundamentals and problem solving.' },
-  { title: 'Exploring cloud', detail: 'Understanding compute, networking, IAM, and cost trade-offs.' },
-  { title: 'DevOps tools', detail: 'Automating builds, testing, releases, and infrastructure workflows.' },
-  { title: 'Building CI/CD pipelines', detail: 'Shipping changes with confidence through observability and guardrails.' },
+  { title: 'DevOps Internship', detail: '6 months at Techmiya Solutions — Jenkins, Maven, Ansible, Docker, AWS' },
+  { title: 'Full-Stack Development', detail: 'Built production-ready HMS and Carbon Credit Platform with React, Django, TypeScript' },
+  { title: 'IEEE Research Publication', detail: 'Deep learning for medical imaging — presented at INSPIRE 2025' },
+  { title: 'CI/CD & Automation', detail: 'Shipping changes with confidence through pipelines, observability, and guardrails' },
 ] as const
 
 function useTheme() {
@@ -249,17 +271,16 @@ export default function App() {
                 transition={{ duration: 0.65, delay: 0.05 }}
                 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-slate-50 md:text-6xl"
               >
-                Shipping reliable systems with
+                DevOps Engineer &
                 <span className="bg-gradient-to-r from-sky-400 via-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
                   {' '}
-                  cloud, automation & CI/CD
+                  Full Stack Developer
                 </span>
-                .
               </motion.h1>
 
               <div className="mt-4 text-lg text-slate-300/90 md:text-xl">
                 <TypingText
-                  lines={['DevOps Enthusiast', 'Cloud Learner', 'Automation Engineer']}
+                  lines={['6 Months DevOps Experience', 'Full-Stack Developer', 'IEEE Published Researcher']}
                   className="font-medium"
                 />
               </div>
@@ -294,15 +315,18 @@ export default function App() {
               </motion.div>
 
               <div className="mt-9 flex flex-wrap items-center gap-3 text-sm text-slate-300/90">
-                <span className="text-xs uppercase tracking-widest text-slate-400/70">Focus</span>
+                <span className="text-xs uppercase tracking-widest text-slate-400/70">Expertise</span>
                 <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">
-                  CI/CD Automation
+                  CI/CD Pipelines
                 </span>
                 <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">
-                  Cloud Foundations
+                  AWS Cloud
                 </span>
                 <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">
-                  Observability
+                  Full-Stack Apps
+                </span>
+                <span className="rounded-full bg-white/5 px-3 py-1 ring-1 ring-white/10">
+                  Docker & K8s
                 </span>
               </div>
             </div>
@@ -430,45 +454,30 @@ export default function App() {
           </GlassCard>
         </section>
 
+        <section id="experience" className="scroll-mt-24 py-14 md:py-20">
+          <SectionTitle
+            eyebrow="Professional Experience"
+            title="6 months of hands-on DevOps & Development"
+            subtitle="Real-world experience with CI/CD pipelines, cloud infrastructure, and full-stack development at Techmiya Solutions."
+          />
+
+          <div className="mt-10 space-y-6">
+            {EXPERIENCE.map((exp, idx) => (
+              <ExperienceCard key={exp.company} {...exp} index={idx} />
+            ))}
+          </div>
+        </section>
+
         <section id="skills" className="scroll-mt-24 py-14 md:py-20">
           <SectionTitle
-            eyebrow="DevOps Skills"
-            title="Tools I use to build, ship, and observe."
-            subtitle="Grouped by category — each card is animated and icon-driven."
+            eyebrow="Technical Skills"
+            title="Full-stack expertise with DevOps focus"
+            subtitle="Proficiency levels across Cloud, DevOps, Programming, Frontend, and Backend technologies."
           />
 
           <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {Object.entries(SKILLS).map(([group, skills]) => (
-              <GlassCard key={group}>
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-semibold text-slate-50">{group}</h3>
-                  <span className="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-300 ring-1 ring-white/10">
-                    {skills.length} items
-                  </span>
-                </div>
-                <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                  {skills.map((s) => (
-                    <motion.div
-                      key={s.name}
-                      whileHover={{ y: -5, scale: 1.02 }}
-                      transition={{ type: 'spring', stiffness: 300, damping: 18 }}
-                      className="rounded-2xl bg-white/5 p-4 ring-1 ring-white/10"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Devicon name={s.icon} className="text-2xl" />
-                        <div className="text-sm font-semibold text-slate-50">{s.name}</div>
-                      </div>
-                      <div className="mt-3 h-1 w-full overflow-hidden rounded-full bg-white/5">
-                        <motion.div
-                          className="h-full w-2/3 rounded-full bg-gradient-to-r from-sky-400 via-violet-500 to-fuchsia-500"
-                          animate={{ x: ['-30%', '30%', '-30%'] }}
-                          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </GlassCard>
+            {Object.entries(SKILLS).map(([group, skills], idx) => (
+              <SkillsMatrix key={group} title={group} skills={skills} index={idx} />
             ))}
           </div>
         </section>
@@ -487,57 +496,13 @@ export default function App() {
         <section id="projects" className="scroll-mt-24 py-14 md:py-20">
           <SectionTitle
             eyebrow="Projects"
-            title="Selected builds — systems, not just apps."
-            subtitle="Hover for motion + quick actions for GitHub and live demos."
+            title="Production-ready full-stack applications"
+            subtitle="Real-world projects showcasing DevOps, full-stack development, and AI/ML expertise."
           />
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
-            {PROJECTS.map((p) => (
-              <motion.div
-                key={p.title}
-                whileHover={{ y: -10, rotateX: 2, rotateY: -2 }}
-                transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-              >
-                <GlassCard className="h-full">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
-                      <h3 className="text-lg font-semibold text-slate-50">{p.title}</h3>
-                      <p className="mt-2 text-sm text-slate-300/90">{p.description}</p>
-                    </div>
-                    <div className="hidden h-10 w-10 rounded-2xl bg-gradient-to-br from-sky-500/20 via-violet-500/20 to-fuchsia-500/20 ring-1 ring-white/10 md:block" />
-                  </div>
-
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {p.tech.map((t) => (
-                      <span
-                        key={t}
-                        className="rounded-full bg-white/5 px-3 py-1 text-xs text-slate-200 ring-1 ring-white/10"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="mt-6 flex flex-wrap gap-3">
-                    <a
-                      href={p.github}
-                      className="inline-flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10 transition hover:bg-white/10"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <FaGithub /> GitHub
-                    </a>
-                    <a
-                      href={p.demo}
-                      className="inline-flex items-center gap-2 rounded-xl bg-white/5 px-4 py-2 text-sm font-semibold text-slate-100 ring-1 ring-white/10 transition hover:bg-white/10"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Live Demo <FaArrowRight />
-                    </a>
-                  </div>
-                </GlassCard>
-              </motion.div>
+            {PROJECTS.map((p, idx) => (
+              <ProjectCard3D key={p.title} {...p} index={idx} />
             ))}
           </div>
         </section>
